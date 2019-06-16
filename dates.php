@@ -1,5 +1,5 @@
 <?php
- 
+  
 class GetDatesinRange {
 	var $date_1;
 	var $date_2;
