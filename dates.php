@@ -16,20 +16,19 @@ class GetDatesinRange {
 		$end 	= date("m-d-Y", strtotime($date_2));
 		$diff 	= $this->get_date_diff($date_1, $date_2);
 		if( $diff < 16 ) { 
-				return get_dates($date_1, $date_2, $diff);
+				return $this->get_dates($date_1, $date_2, $diff);
 		} 	elseif($diff == 16) { 
-				return get_dates($date_1, $date_2, $diff);
+				return $this->get_dates($date_1, $date_2, $diff);
 		}	elseif($diff % 16 == 0) { 
-				return get_dates($date_1, $date_2, $diff);
+				return $this->get_dates($date_1, $date_2, $diff);
 		} else { 
-				$dates = get_dates($date_1, $date_2, $diff);
-				return set_dates($dates, $diff);
+				$dates = $this->get_dates($date_1, $date_2, $diff);
+				return $this->set_dates($dates, $diff);
 		}
 	}
 
 	//generates date array in range
 	function get_dates($date_1, $date_2, $diff) {
-		echo $date_1; echo $date_2; echo $diff;
 		$dates 		= array();
 		$begin 		= new DateTime($date_1);
 		$end 		= new DateTime($date_2);
@@ -41,8 +40,14 @@ class GetDatesinRange {
 		    $dates[] = $dt->format("Y-m-d");
 		}
 		if( $diff<16)
-			$dates = merge_array($dates,$diff);
+			$dates = $this->merge_array($dates,$diff);
 		return $dates;
+	}
+
+	//merge array
+	function merge_array($dates, $diff) {
+		$array_slice = array_slice($dates, 0,(16-$diff) );
+		return array_merge($dates,$array_slice);
 	}
 
 	//set all dates more than 16
@@ -62,6 +67,7 @@ class GetDatesinRange {
 	}
 
 }
+
 
 // $dates = new GetDatesinRange('2019-06-01','2019-06-10');
 // $dates = new GetDatesinRange('2019-06-01','2019-06-17');
