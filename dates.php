@@ -1,6 +1,6 @@
 <?php
   
-class GetDatesinRange {
+class GetDatesinRange { 
 	var $date_1;
 	var $date_2;
 	public function __construct($a,$b)
